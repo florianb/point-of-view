@@ -27,7 +27,7 @@ function fastifyView (fastify, opts, next) {
   const includeViewExtension = opts.includeViewExtension || false
   const prod = typeof opts.production === 'boolean' ? opts.production : process.env.NODE_ENV === 'production'
   const defaultCtx = opts.defaultContext || {}
-  const renders = {
+  const renderers = {
     marko: viewMarko,
     'ejs-mate': viewEjsMate,
     handlebars: viewHandlebars,
@@ -37,7 +37,7 @@ function fastifyView (fastify, opts, next) {
     _default: view
   }
 
-  const renderer = renders[type] ? renders[type] : renders._default
+  const renderer = renderers[type] ? renderers[type] : renderers._default
 
   fastify.decorate('view', function () {
     const args = Array.from(arguments)

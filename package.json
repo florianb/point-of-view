@@ -7,7 +7,8 @@
     "example": "node example.js",
     "example-with-options": "node example-ejs-with-some-options.js",
     "test-with-snapshot": "standard && cross-env TAP_SNAPSHOT=1 tap test/test-ejs-with-snapshot.js",
-    "test": "standard && tap -J test/* && tsc"
+    "test": "standard && tap -J test/* && tsc",
+    "benchmark": "cd benchmark && node express.js & echo '\n\n# Express\n'; autocannon -c 100 -d 5 -p 10 localhost:3000 ; kill $(lsof -t -i :3000 -s TCP:LISTEN); cd benchmark && node fastify.js & echo '\n\n# Fastify\n'; autocannon -c 100 -d 5 -p 10 localhost:3000 ; kill $(lsof -t -i :3000 -s TCP:LISTEN)"
   },
   "repository": {
     "type": "git",
@@ -36,7 +37,9 @@
     "hashlru": "^2.3.0"
   },
   "devDependencies": {
+    "@types/node": "^11.11.3",
     "art-template": "^4.13.2",
+    "autocannon": "^4.1.1",
     "cross-env": "^5.2.0",
     "ejs": "^2.6.1",
     "ejs-mate": "^2.3.0",
@@ -53,8 +56,7 @@
     "simple-get": "^3.0.3",
     "standard": "^12.0.1",
     "tap": "^12.5.2",
-    "typescript": "^3.3.3",
-    "@types/node": "^11.11.3"
+    "typescript": "^3.3.3"
   },
   "standard": {
     "ignore": [
